@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+      <title>Sueldo del Vendedor</title>
+</head>
+<body>
+    <h1>Sueldo del Vendedor</h1>
+    <form id="calculoForm">
+        <label for="sueldoBase">Sueldo Base:</label>
+        <input type="number" id="sueldoBase" name="sueldoBase" required>
+        <br>
+        <label for="venta1">Venta 1:</label>
+        <input type="number" id="venta1" name="venta1" required>
+        <br>
+        <label for="venta2">Venta 2:</label>
+        <input type="number" id="venta2" name="venta2" required>
+        <br>
+        <label for="venta3">Venta 3:</label>
+        <input type="number" id="venta3" name="venta3" required>
+        <br>
+        <button type="submit">Calcular</button>
+    </form>
+    <div id="resultado"></div>
+
+    <script>
+        function calcularComisiones(venta1, venta2, venta3) {
+            const tasaComision = 0.10;
+            const comisionTotal = (venta1 + venta2 + venta3) * tasaComision;
+            return comisionTotal;
+        }
+
+        document.getElementById('calculoForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Evita que el formulario se envíe
+
+            const sueldoBase = parseFloat(document.getElementById('sueldoBase').value);
+            const venta1 = parseFloat(document.getElementById('venta1').value);
+            const venta2 = parseFloat(document.getElementById('venta2').value);
+            const venta3 = parseFloat(document.getElementById('venta3').value);
+
+            if (isNaN(sueldoBase) || sueldoBase <= 0 || isNaN(venta1) || venta1 < 0 || isNaN(venta2) || venta2 < 0 || isNaN(venta3) || venta3 < 0) {
+                document.getElementById('resultado').innerText = "Por favor, ingrese valores válidos para el sueldo base y las ventas.";
+                return;
+            }
+
+            const comisionTotal = calcularComisiones(venta1, venta2, venta3);
+            const sueldoTotal = sueldoBase + comisionTotal;
+
+            document.getElementById('resultado').innerText = `Comisión total: ${comisionTotal.toFixed(2)}\nSueldo total: ${sueldoTotal.toFixed(2)}`;
+        });
+    </script>
+</body>
+</html>

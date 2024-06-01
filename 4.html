@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+ 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Calificación Final</title>
+</head>
+<body>
+    <h1>Calculadora de Calificación Final en Algoritmos</h1>
+    <form id="calculoForm">
+        <label for="parcial1">Calificación Parcial 1:</label>
+        <input type="number" id="parcial1" name="parcial1" required>
+        <br>
+        <label for="parcial2">Calificación Parcial 2:</label>
+        <input type="number" id="parcial2" name="parcial2" required>
+        <br>
+        <label for="parcial3">Calificación Parcial 3:</label>
+        <input type="number" id="parcial3" name="parcial3" required>
+        <br>
+        <label for="examenFinal">Calificación del Examen Final:</label>
+        <input type="number" id="examenFinal" name="examenFinal" required>
+        <br>
+        <label for="trabajoFinal">Calificación del Trabajo Final:</label>
+        <input type="number" id="trabajoFinal" name="trabajoFinal" required>
+        <br>
+        <button type="submit">Calcular</button>
+    </form>
+    <div id="resultado"></div>
+
+    <script>
+        function calcularCalificacionFinal(parcial1, parcial2, parcial3, examenFinal, trabajoFinal) {
+            const promedioParciales = (parcial1 + parcial2 + parcial3) / 3;
+            const calificacionFinal = 
+                (promedioParciales * 0.55) + 
+                (examenFinal * 0.30) + 
+                (trabajoFinal * 0.15);
+            return calificacionFinal;
+        }
+
+        document.getElementById('calculoForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Evita que el formulario se envíe
+
+            const parcial1 = parseFloat(document.getElementById('parcial1').value);
+            const parcial2 = parseFloat(document.getElementById('parcial2').value);
+            const parcial3 = parseFloat(document.getElementById('parcial3').value);
+            const examenFinal = parseFloat(document.getElementById('examenFinal').value);
+            const trabajoFinal = parseFloat(document.getElementById('trabajoFinal').value);
+
+            if (isNaN(parcial1) || parcial1 < 0 || parcial1 > 10 ||
+                isNaN(parcial2) || parcial2 < 0 || parcial2 > 10 ||
+                isNaN(parcial3) || parcial3 < 0 || parcial3 > 10 ||
+                isNaN(examenFinal) || examenFinal < 0 || examenFinal > 10 ||
+                isNaN(trabajoFinal) || trabajoFinal < 0 || trabajoFinal > 10) {
+                document.getElementById('resultado').innerText = "Por favor, ingrese calificaciones válidas (0-10).";
+                return;
+            }
+
+            const calificacionFinal = calcularCalificacionFinal(parcial1, parcial2, parcial3, examenFinal, trabajoFinal);
+            document.getElementById('resultado').innerText = "Calificación final: " + calificacionFinal.toFixed(2);
+        });
+    </script>
+</body>
+</html>

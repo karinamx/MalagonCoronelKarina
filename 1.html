@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Calcular Ganancia Mensual</title>
+</head>
+<body>
+    <h1>Calculadora de Ganancia Mensual</h1>
+    <form id="calculoForm">
+        <label for="capitalInicial">Capital Inicial:</label>
+        <input type="number" id="capitalInicial" name="capitalInicial" required>
+        <button type="submit">Calcular</button>
+    </form>
+    <div id="resultado"></div>
+
+    <script>
+        function GananciaMensual(capitalInicial) {
+            const tasaInteresMensual = 0.02;
+            const ganancia = capitalInicial * tasaInteresMensual;
+            const capitalTotal = capitalInicial + ganancia;
+            return capitalTotal;
+        }
+
+        document.getElementById('calculoForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Evita que el formulario se envíe
+
+            const capitalInicial = parseFloat(document.getElementById('capitalInicial').value);
+            if (isNaN(capitalInicial) || capitalInicial <= 0) {
+                document.getElementById('resultado').innerText = "Por favor, ingrese un valor válido para el capital inicial.";
+                return;
+            }
+
+            const capitalDespuesDeUnMes = GananciaMensual(capitalInicial);
+            document.getElementById('resultado').innerText = "Capital después de un mes: " + capitalDespuesDeUnMes.toFixed(2);
+        });
+    </script>
+</body>
+</html>
