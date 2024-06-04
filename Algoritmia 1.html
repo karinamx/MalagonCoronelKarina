@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Revertir Orden de Palabras</title>
+    <script>
+        function revertirOrdenPalabras() {
+            let entrada = document.getElementById('campoTexto').value;
+            let arrayPalabras = entrada.split(' ');
+            let arrayPalabrasInvertidas = arrayPalabras.reverse();
+            let textoInvertido = arrayPalabrasInvertidas.join(' ');
+            document.getElementById('resultado').innerText = textoInvertido;
+        }
+    </script>
+</head>
+<body>
+    <h1>Revertir Orden de Palabras</h1>
+    <p>Escribe una lista de palabras separadas por espacios:</p>
+    <input type="text" id="campoTexto" />
+    <button onclick="revertirOrdenPalabras()">Revertir</button>
+    <p>El texto con el orden de palabras invertido es:</p>
+    <p id="resultado"></p>
+</body>
+</html>
