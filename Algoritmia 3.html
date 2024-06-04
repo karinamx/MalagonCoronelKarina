@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Palabra con mayor número de caracteres únicos</title>
+    <script>
+        function contarCaracteresDiferentes(palabra) {
+            let conjuntoCaracteres = new Set();
+            for (let i = 0; i < palabra.length; i++) {
+                let caracter = palabra[i];
+                if (caracter >= 'A' && caracter <= 'Z') {
+                    conjuntoCaracteres.add(caracter);
+                }
+            }
+            return conjuntoCaracteres.size;
+        }
+
+        function palabraConMayorDiversidad() {
+       
+            let entrada = document.getElementById('campoPalabras').value;
+
+            
+            let listaPalabras = entrada.split(',');
+
+         
+            let palabraMaxUnicos = '';
+            let maxCaracteresUnicos = 0;
+
+    
+            for (let palabra of listaPalabras) {
+                let cuentaUnicos = contarCaracteresDiferentes(palabra);
+                if (cuentaUnicos > maxCaracteresUnicos) {
+                    maxCaracteresUnicos = cuentaUnicos;
+                    palabraMaxUnicos = palabra;
+                }
+            }
+
+     
+            document.getElementById('resultado').innerText = `La palabra con más caracteres únicos es "${palabraMaxUnicos}" con ${maxCaracteresUnicos} caracteres únicos.`;
+        }
+    </script>
+</head>
+<body>
+    <h1>Palabra con mayor número de caracteres únicos</h1>
+    <p>Introduce una lista de palabras separadas por comas (sin espacios):</p>
+    <input type="text" id="campoPalabras" />
+    <button onclick="palabraConMayorDiversidad()">Encontrar</button>
+    <p id="resultado"></p>
+</body>
+</html>
